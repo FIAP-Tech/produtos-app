@@ -1,0 +1,49 @@
+services:
+  produtos-app:
+    image: 'produtos-app:latest'
+    build:
+      context: ./produtos-app
+    container_name: produtos-app
+    ports:
+      - 8080:80
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DATASOURCE_URL=jdbc:postgresql://db:5432/db_produtos
+      - DATASOURCE_USERNAME=postgres
+      - DATASOURCE_PASSWORD=teste123
+
+  clientes-app:
+    image: 'clientes-app:latest'
+    build:
+      context: ./clientes-app
+    container_name: clientes-app
+    ports:
+      - 8081:80
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DATASOURCE_URL=jdbc:postgresql://db:5432/db_clientes
+      - DATASOURCE_USERNAME=postgres
+      - DATASOURCE_PASSWORD=teste123
+
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: db_produtos
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: teste123
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+
