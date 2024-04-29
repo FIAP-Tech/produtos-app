@@ -1,4 +1,4 @@
-package br.com.fiap.produto.model;
+package br.com.fiap.produtos.model;
 
 
 import jakarta.persistence.Entity;

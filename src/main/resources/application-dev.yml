@@ -1,0 +1,34 @@
+server:
+    port: ${PORT:8080}
+spring:
+    datasource:
+        driverClassName: org.postgresql.Driver
+        password: ${DATASOURCE_PASSWORD}
+        url: ${DATASOURCE_URL}
+        username: ${DATASOURCE_USERNAME}
+    jpa:
+        hibernate:
+            ddl-auto: create-drop
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+                jdbc:
+                    lob:
+                        non_contextual_creation: true
+    mvc:
+        format:
+            date: yyyy-MM-dd
+            date-time: yyyy-MM-dd HH:mm:ss
+            time: HH:mm:ss
+
+
+    cloud:
+         aws:
+             region:
+                  static: us-east-1
+                  auto: false
+             credentials:
+                  access-key: ${AWS_ACCESS_KEY:AKIAZSRR2TF42AH4EETO}
+                  secret-key: ${AWS_SECRET_KEY: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}
+             end-point:
+                  uri: ${AWS_ENDPOINT:http://localhost:4566}

@@ -1,13 +1,13 @@
-package br.com.fiap.produto;
+package br.com.fiap.produtos;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ProdutoApplication {
+public class ProdutosApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ProdutoApplication.class, args);
+        SpringApplication.run(ProdutosApplication.class, args);
     }
 
 }

@@ -1,7 +1,7 @@
-package br.com.fiap.produto.service;
+package br.com.fiap.produtos.service;
 
-import br.com.fiap.produto.model.Produto;
-import br.com.fiap.produto.repository.ProdutoRepository;
+import br.com.fiap.produtos.model.Produto;
+import br.com.fiap.produtos.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,39 +28,36 @@ public class Produtoservice {
         Produto produto = produtoRepository.findById(id).orElse(null);
         if (produto != null) {
             return ResponseEntity.ok(produto);
-        }else{
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto não encontrado.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto não encontrado!");
         }
     }
 
-    public Produto atualizarProduto(Integer produtoId, Produto novoProduto){
+    public Produto atualizarProduto(Integer produtoId, Produto novoProduto) {
         Produto produtoExistente = produtoRepository.findById(produtoId).orElse(null);
 
         if (produtoExistente != null) {
-           produtoExistente.setNome(novoProduto.getNome());
-           produtoExistente.setDescricao(novoProduto.getDescricao());
-           produtoExistente.setQuantidade_estoque(novoProduto.getQuantidade_estoque());
-           produtoExistente.setPreco(novoProduto.getPreco());
+            produtoExistente.setNome(novoProduto.getNome());
+            produtoExistente.setDescricao(novoProduto.getDescricao());
+            produtoExistente.setQuantidade_estoque(novoProduto.getQuantidade_estoque());
+            produtoExistente.setPreco(novoProduto.getPreco());
 
-           return produtoRepository.save(produtoExistente);
-        }else{
-            throw new NoSuchElementException("Produto não encontrado.");
+            return produtoRepository.save(produtoExistente);
+        } else {
+            throw new NoSuchElementException("Produto não encontrado!");
         }
     }
 
     public void excluirProduto(Integer produtoId) {
         Produto produtoExistente = produtoRepository.findById(produtoId).orElse(null);
 
-        if(produtoExistente != null){
+        if (produtoExistente != null) {
             produtoRepository.delete(produtoExistente);
-        }else{
+        } else {
             throw new NoSuchElementException("Produto não encontrado!");
         }
 
     }
-
-
-
 
 
 }

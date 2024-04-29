@@ -1,7 +1,7 @@
-package br.com.fiap.produto.controller;
+package br.com.fiap.produtos.controller;
 
-import br.com.fiap.produto.model.Produto;
-import br.com.fiap.produto.service.Produtoservice;
+import br.com.fiap.produtos.model.Produto;
+import br.com.fiap.produtos.service.Produtoservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

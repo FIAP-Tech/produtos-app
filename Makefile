@@ -39,7 +39,6 @@ system-test:
 	@echo $(TIMESTAMP) [INFO] cucumber HTML report generate in: target/cucumber-reports/cucumber.html
 
 performance-test:
-	#@./mvnw ${MVN_ARGS} jmeter:jmeter -Pperformance-test
 	@./mvnw clean verify -Pperformance-test
 
 test: unit-test integration-test performance-test
