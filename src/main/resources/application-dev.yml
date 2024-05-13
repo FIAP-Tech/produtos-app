@@ -1,0 +1,22 @@
+server:
+    port: 8081
+spring:
+    datasource:
+        driverClassName: org.postgresql.Driver
+        password: ${DATASOURCE_PASSWORD:teste123}
+        url: ${DATASOURCE_URL:jdbc:postgresql://ec2-52-90-2-240.compute-1.amazonaws.com:5432/db_produtos}
+        username: ${DATASOURCE_USERNAME:postgres}
+    jpa:
+        hibernate:
+            ddl-auto: create-drop
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+                jdbc:
+                    lob:
+                        non_contextual_creation: true
+    mvc:
+        format:
+            date: yyyy-MM-dd
+            date-time: yyyy-MM-dd HH:mm:ss
+            time: HH:mm:ss
