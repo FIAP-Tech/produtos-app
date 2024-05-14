@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/produtos")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class ProductController {
 
     private final ProductService productService;
@@ -53,7 +54,7 @@ public class ProductController {
     }
 
 
-     @PostMapping(value="/variosProdutos", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
+     @PostMapping(value="/carga", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> uploadCSVFile(@RequestParam("file") MultipartFile file) {
         if (file.isEmpty()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Arquivo está vazio!");
