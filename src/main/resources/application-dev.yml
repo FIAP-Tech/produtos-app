@@ -3,9 +3,9 @@ server:
 spring:
     datasource:
         driverClassName: org.postgresql.Driver
-        password: ${DATASOURCE_PASSWORD:teste123}
-        url: ${DATASOURCE_URL:jdbc:postgresql://ec2-52-90-2-240.compute-1.amazonaws.com:5432/db_produtos}
-        username: ${DATASOURCE_USERNAME:postgres}
+        password: teste123
+        url: jdbc:postgresql://ec2-52-90-2-240.compute-1.amazonaws.com:5432/db_produtos
+        username: postgres
     jpa:
         hibernate:
             ddl-auto: create-drop
