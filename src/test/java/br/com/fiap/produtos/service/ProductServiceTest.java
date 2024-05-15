@@ -38,8 +38,8 @@ public class ProductServiceTest {
 
     @Test
     void testCreateProduct() {
-        ProductRequest productRequest = new ProductRequest(1L, "Test Product", "Test Description", BigDecimal.valueOf(100.0));
-        Product product = new Product(1L, "Test Product", "Test Description", BigDecimal.valueOf(100.0));
+        ProductRequest productRequest = new ProductRequest(1L, "Test Product", "Test Description", 100,BigDecimal.valueOf(100.0));
+        Product product = new Product(1L, "Test Product", "Test Description", 100,BigDecimal.valueOf(100.0));
 
         when(productRepository.save(any())).thenReturn(product);
 
@@ -47,6 +47,7 @@ public class ProductServiceTest {
 
         assertEquals(product.getName(), response.name());
         assertEquals(product.getDescription(), response.description());
+        assertEquals(product.getQuantity(),response.quantity());
         assertEquals(product.getPrice(), response.price());
 
         verify(productRepository, times(1)).save(any());
@@ -56,8 +57,8 @@ public class ProductServiceTest {
     @Test
     void testGetAllProducts() {
         List<Product> productList = new ArrayList<>();
-        productList.add(new Product(1L, "Test Product 1", "Test Description 1", BigDecimal.valueOf(100.0)));
-        productList.add(new Product(2L, "Test Product 2", "Test Description 2", BigDecimal.valueOf(200.0)));
+        productList.add(new Product(1L, "Test Product 1", "Test Description 1", 100,BigDecimal.valueOf(100.0)));
+        productList.add(new Product(2L, "Test Product 2", "Test Description 2", 100,BigDecimal.valueOf(200.0)));
 
         when(productRepository.findAll()).thenReturn(productList);
 
@@ -68,6 +69,7 @@ public class ProductServiceTest {
         for (int i = 0; i < productList.size(); i++) {
             assertEquals(productList.get(i).getName(), responseList.get(i).name());
             assertEquals(productList.get(i).getDescription(), responseList.get(i).description());
+            assertEquals(productList.get(i).getQuantity(), responseList.get(i).quantity());
             assertEquals(productList.get(i).getPrice(), responseList.get(i).price());
         }
 
@@ -77,7 +79,7 @@ public class ProductServiceTest {
     @Test
     void testGetProductById() {
         Long id = 1L;
-        Product product = new Product(id, "Test Product", "Test Description", BigDecimal.valueOf(100.0));
+        Product product = new Product(id, "Test Product", "Test Description", 100,BigDecimal.valueOf(100.0));
 
         when(productRepository.findById(id)).thenReturn(Optional.of(product));
 
@@ -86,6 +88,7 @@ public class ProductServiceTest {
         assertEquals(1, responseList.size());
         assertEquals(product.getName(), responseList.get(0).name());
         assertEquals(product.getDescription(), responseList.get(0).description());
+        assertEquals(product.getQuantity(), responseList.get(0).quantity());
         assertEquals(product.getPrice(), responseList.get(0).price());
 
         verify(productRepository, times(1)).findById(id);
@@ -105,8 +108,8 @@ public class ProductServiceTest {
     @Test
     void testUpdateProduct() {
         Long id = 1L;
-        ProductRequest productRequest = new ProductRequest(id, "Updated Product", "Updated Description", BigDecimal.valueOf(150.0));
-        Product product = new Product(id, "Original Product", "Original Description", BigDecimal.valueOf(100.0));
+        ProductRequest productRequest = new ProductRequest(id, "Updated Product","Updated Description", 100,BigDecimal.valueOf(150.0));
+        Product product = new Product(id, "Original Product", "Original Description", 100,BigDecimal.valueOf(100.0));
 
         when(productRepository.findById(id)).thenReturn(Optional.of(product));
         when(productRepository.save(any())).thenReturn(product);
@@ -116,6 +119,7 @@ public class ProductServiceTest {
         assertEquals("Produto atualizado!", response);
         assertEquals(productRequest.name(), product.getName());
         assertEquals(productRequest.description(), product.getDescription());
+        assertEquals(productRequest.quantity(), product.getQuantity());
         assertEquals(productRequest.price(), product.getPrice());
 
         verify(productRepository, times(1)).findById(id);

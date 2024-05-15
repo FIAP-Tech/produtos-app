@@ -29,18 +29,19 @@ public class ProductService {
         Product product = Product.builder()
                 .name(productRequest.name())
                 .description(productRequest.description())
+                .quantity(productRequest.quantity())
                 .price(productRequest.price())
                 .build();
         productRepository.save(product);
         log.info("Produto cadastrado!");
-        return new ProductResponse(product.getId(), product.getName(), product.getDescription(), product.getPrice());
+        return new ProductResponse(product.getId(), product.getName(), product.getDescription(), product.getQuantity(), product.getPrice());
     }
 
 
     public List<ProductResponse> getAllProducts() {
         return productRepository.findAll()
                 .stream()
-                .map(product -> new ProductResponse(product.getId(), product.getName(), product.getDescription(), product.getPrice()))
+                .map(product -> new ProductResponse(product.getId(), product.getName(), product.getDescription(), product.getQuantity(), product.getPrice()))
                 .toList();
     }
 
@@ -48,7 +49,7 @@ public class ProductService {
         var produto = productRepository.findById(id);
         if (produto.isPresent()) {
             return produto.stream()
-                    .map(product -> new ProductResponse(produto.get().getId(), produto.get().getName(), produto.get().getDescription(), produto.get().getPrice()))
+                    .map(product -> new ProductResponse(produto.get().getId(), produto.get().getName(),  produto.get().getDescription(), product.getQuantity(), produto.get().getPrice()))
                     .toList();
 
         } else {
