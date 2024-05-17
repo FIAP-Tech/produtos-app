@@ -3,7 +3,7 @@ server:
 spring:
     datasource:
         driverClassName: org.postgresql.Driver
-        url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/db_clientes}
+        url: ${DATASOURCE_URL:jdbc:postgresql://database-1-instance-1.cniicq4oumi6.us-east-1.rds.amazonaws.com:5432/db_produtos}
         username: ${DATASOURCE_USERNAME:postgres}
         password: ${DATASOURCE_PASSWORD:teste123}
     jpa:
