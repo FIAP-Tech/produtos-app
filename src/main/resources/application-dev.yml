@@ -1,5 +1,6 @@
 server:
-    port: 8081
+    port: ${PORT:80}
+
 spring:
     datasource:
         driverClassName: org.postgresql.Driver
