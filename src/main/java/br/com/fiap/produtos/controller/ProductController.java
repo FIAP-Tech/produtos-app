@@ -54,7 +54,7 @@ public class ProductController {
     }
 
 
-     @PostMapping(value="/carga", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value="/carga", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> uploadCSVFile(@RequestParam("file") MultipartFile file) {
         if (file.isEmpty()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Arquivo está vazio!");
@@ -67,6 +67,11 @@ public class ProductController {
         }
     }
 
-
+    @PostMapping("/{idProduto}/atualizar-estoque")
+    public ResponseEntity<String> atualizarEstoqueProduto(@PathVariable Long idProduto, @RequestParam Integer quantidadeVendida) {
+        return productService.atualizarEstoqueProduto(idProduto, quantidadeVendida)
+                .map(order -> ResponseEntity.ok("Estoque atualizado com Sucesso"))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
 
 }

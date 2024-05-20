@@ -18,6 +18,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -111,4 +112,16 @@ public class ProductService {
     }
 
 
+    public Optional<Product> atualizarEstoqueProduto(Long idProduto, Integer quantidadeVendida) {
+        Optional<Product> optionalProduct = productRepository.findById(idProduto);
+
+        if(optionalProduct.isPresent()) {
+            Product product = optionalProduct.get();
+            product.setQuantity(product.getQuantity() - quantidadeVendida);
+
+            return Optional.of(productRepository.save(product));
+        } else {
+            return Optional.empty();
+        }
+    }
 }
