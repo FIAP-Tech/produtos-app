@@ -45,12 +45,12 @@ public class ProductService {
                 .toList();
     }
 
-    public List<ProductResponse> getProductById(Long id) {
+    public ProductResponse getProductById(Long id) {
         var produto = productRepository.findById(id);
         if (produto.isPresent()) {
             return produto.stream()
                     .map(product -> new ProductResponse(produto.get().getId(), produto.get().getName(),  produto.get().getDescription(), product.getQuantity(), produto.get().getPrice()))
-                    .toList();
+                    .findFirst().get();
 
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
