@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/api/produtos")
@@ -19,6 +20,9 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
+
+    private static final Logger logger = Logger.getLogger(ProductController.class.getName());
+
 
 
     @PostMapping
@@ -37,7 +41,9 @@ public class ProductController {
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ProductResponse getByIdProduct(@PathVariable("id") Long id) {
-        return productService.getProductById(id);
+        ProductResponse productResponse = productService.getProductById(id);
+        logger.info("teste ricardo log: " + productResponse.toString());
+        return productResponse;
     }
 
 
