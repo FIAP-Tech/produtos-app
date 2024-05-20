@@ -96,12 +96,13 @@ public class ProductService {
                 Product produto = new Product();
                 produto.setName(parts[0]);
                 produto.setDescription(parts[1]);
+                produto.setQuantity(Integer.valueOf(parts[2]));
                 BigDecimal price = null;
                 try {
-                    price = new BigDecimal(parts[2]);
+                    price = new BigDecimal(parts[3]);
                     produto.setPrice(price);
                 } catch (NumberFormatException e) {
-                    System.err.println("Valor incorreto: " + parts[2]);
+                    System.err.println("Valor incorreto: " + parts[3]);
 
                 }
                 produtos.add(produto);
